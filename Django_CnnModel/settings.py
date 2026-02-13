@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-s#eo-5ivni1c%t^99*xut*je@)%5r8#6@t(yvv4=8a)!n)td(6'
+# SECRET_KEY = 'django-insecure-s#eo-5ivni1c%t^99*xut*je@)%5r8#6@t(yvv4=8a)!n)td(6'
+SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-secret-key")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -56,11 +59,12 @@ MIDDLEWARE = [
 ]
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173", # <--- CHANGE THIS TO 5173
-    "http://127.0.0.1:5173", # <--- CHANGE THIS TO 5173 (good practice to include both localhost and 127.0.0.1)
-    # Add your production frontend URL here when deploying
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173", # <--- CHANGE THIS TO 5173
+#     "http://127.0.0.1:5173", # <--- CHANGE THIS TO 5173 (good practice to include both localhost and 127.0.0.1)
+#     # Add your production frontend URL here when deploying
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'Django_CnnModel.urls'
 
@@ -128,6 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -136,11 +141,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Django_CnnModel/settings.py
-import os
-from dotenv import load_dotenv
+
+# from dotenv import load_dotenv
 
 # Load environment variables (make sure this is near the top)
-load_dotenv(os.path.join(BASE_DIR, '.env'))
+# load_dotenv(os.path.join(BASE_DIR, '.env'))
 # ... (other settings) ...
 
 # Email Configuration
@@ -184,8 +189,8 @@ LOGGING = {
 
 # Django_CnnModel/settings.py
 # ...
-load_dotenv(os.path.join(BASE_DIR, '.env'))
-print(f"DEBUG: SMTP_USERNAME loaded: {os.getenv('SMTP_USERNAME')}")
-print(f"DEBUG: SMTP_PASSWORD loaded: {'*' * len(os.getenv('SMTP_PASSWORD')) if os.getenv('SMTP_PASSWORD') else 'None'}") # Print obscured password
-print(f"DEBUG: FROM_EMAIL loaded: {os.getenv('FROM_EMAIL')}")
+# load_dotenv(os.path.join(BASE_DIR, '.env'))
+# print(f"DEBUG: SMTP_USERNAME loaded: {os.getenv('SMTP_USERNAME')}")
+# print(f"DEBUG: SMTP_PASSWORD loaded: {'*' * len(os.getenv('SMTP_PASSWORD')) if os.getenv('SMTP_PASSWORD') else 'None'}") # Print obscured password
+# print(f"DEBUG: FROM_EMAIL loaded: {os.getenv('FROM_EMAIL')}")
 # ...
