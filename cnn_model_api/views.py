@@ -71,7 +71,7 @@ def predict_image(request):
         logger.error("No image file provided in request.")
         return Response({'detail': 'No image file provided.'}, status=status.HTTP_400_BAD_REQUEST)
 
-    image_file = request.FILES['file']
+    image_file = request.FILES['image']
     email_address = request.POST.get('email', None) # Get email, default to None if not provided
 
     # temp_file_path is not strictly necessary here if predict_ecg_image can handle
