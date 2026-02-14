@@ -148,15 +148,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # load_dotenv(os.path.join(BASE_DIR, '.env'))
 # ... (other settings) ...
 
-# Email Configuration
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = os.getenv("SMTP_SERVER", "smtp.gmail.com")
-# EMAIL_PORT = int(os.getenv("SMTP_PORT", 587))
-# EMAIL_USE_TLS = True # Use TLS for encryption
-# EMAIL_HOST_USER = os.getenv("SMTP_USERNAME")
-# EMAIL_HOST_PASSWORD = os.getenv("SMTP_PASSWORD")
-# DEFAULT_FROM_EMAIL = os.getenv("FROM_EMAIL", EMAIL_HOST_USER)
-
 # Custom flag to enable/disable email sending
 # Email flags
 EMAIL_ENABLED = os.getenv("EMAIL_ENABLED", "true").lower() == "true"
