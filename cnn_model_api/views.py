@@ -89,7 +89,7 @@ def predict_image(request):
             # Start the email sending task in a separate thread
             # email_thread = threading.Thread(target=run_send_email_in_thread)
             # email_thread.start()
-            asyncio.run(send_email_report(email_address, response_data))
+            send_email_report(email_address, response_data)
             logger.info("Email sending task started in a new thread.")
 
         # Return the prediction response to the frontend
