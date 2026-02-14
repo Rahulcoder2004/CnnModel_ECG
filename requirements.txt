@@ -5,3 +5,9 @@ gunicorn
 whitenoise
 psycopg2-binary
 python-dotenv
+
+# ML / CV dependencies
+numpy
+opencv-python-headless
+tensorflow
+pillow
