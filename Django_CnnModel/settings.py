@@ -149,16 +149,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ... (other settings) ...
 
 # Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv("SMTP_SERVER", "smtp.gmail.com")
-EMAIL_PORT = int(os.getenv("SMTP_PORT", 587))
-EMAIL_USE_TLS = True # Use TLS for encryption
-EMAIL_HOST_USER = os.getenv("SMTP_USERNAME")
-EMAIL_HOST_PASSWORD = os.getenv("SMTP_PASSWORD")
-DEFAULT_FROM_EMAIL = os.getenv("FROM_EMAIL", EMAIL_HOST_USER)
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = os.getenv("SMTP_SERVER", "smtp.gmail.com")
+# EMAIL_PORT = int(os.getenv("SMTP_PORT", 587))
+# EMAIL_USE_TLS = True # Use TLS for encryption
+# EMAIL_HOST_USER = os.getenv("SMTP_USERNAME")
+# EMAIL_HOST_PASSWORD = os.getenv("SMTP_PASSWORD")
+# DEFAULT_FROM_EMAIL = os.getenv("FROM_EMAIL", EMAIL_HOST_USER)
 
 # Custom flag to enable/disable email sending
-CUSTOM_EMAIL_ENABLED = os.getenv("EMAIL_ENABLED", "true").lower() == "true"
+# Email flags
+EMAIL_ENABLED = os.getenv("EMAIL_ENABLED", "true").lower() == "true"
+
+# Resend configuration
+RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "onboarding@resend.dev")
+
+
+# CUSTOM_EMAIL_ENABLED = os.getenv("EMAIL_ENABLED", "true").lower() == "true"
 
 # Add logging configuration (optional but good practice)
 LOGGING = {
