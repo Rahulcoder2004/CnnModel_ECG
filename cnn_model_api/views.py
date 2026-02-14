@@ -10,8 +10,6 @@ from rest_framework import status
 import os
 import shutil
 import logging
-import threading
-import asyncio
 
 # Import necessary components from your utils.py
 # Make sure send_email_report, predict_ecg_image, and class_descriptions are correctly defined in utils.py
@@ -64,33 +62,7 @@ def predict_image(request):
 
         # If an email address is provided, attempt to send the report
         if email_address:
-            # Prepare the result dictionary to be sent in the email.
-            # This ensures the email contains the ACTUAL prediction results.
-            email_result = {
-                'status': prediction_status,
-                'confidence': confidence,
-                'condition': predicted_condition_name,
-                'description': predicted_description,
-            }
-
-            # Define a wrapper function to run the async send_email_report in a new thread
-            # This prevents blocking the main Django request thread.
-            def run_send_email_in_thread():
-                try:
-                    # Create a new event loop for this thread to run the async function
-                    loop = asyncio.new_event_loop()
-                    asyncio.set_event_loop(loop)
-                    # Run the async email sending function
-                    loop.run_until_complete(send_email_report(email_address, email_result))
-                    loop.close() # Close the event loop when done
-                except Exception as e:
-                    logger.error(f"Error in email sending background thread: {e}", exc_info=True)
-
-            # Start the email sending task in a separate thread
-            # email_thread = threading.Thread(target=run_send_email_in_thread)
-            # email_thread.start()
             send_email_report(email_address, response_data)
-            logger.info("Email sending task started in a new thread.")
 
         # Return the prediction response to the frontend
         return Response(response_data, status=status.HTTP_200_OK)

@@ -11,3 +11,5 @@ numpy
 opencv-python-headless
 tensorflow
 pillow
+
+requests
