@@ -1,47 +1,4 @@
-# from django.shortcuts import render
 
-# # Create your views here.
-# # cnn_model_api/views.py
-# from django.http import JsonResponse
-# from django.views.decorators.csrf import csrf_exempt
-# from rest_framework.parsers import MultiPartParser, FormParser
-# from rest_framework.decorators import api_view, parser_classes
-# from .utils import predict_ecg_image, class_descriptions, class_names # Import necessary components
-# from rest_framework.response import Response
-# from rest_framework import status
-
-# # Ensure you have Django REST Framework installed: pip install djangorestframework
-
-# @csrf_exempt # Use this for simplicity during development, but consider proper CSRF handling in production
-# @api_view(['POST'])
-# @parser_classes([MultiPartParser, FormParser])
-# def predict_image(request):
-#     if 'file' not in request.FILES:
-#         return Response({'detail': 'No image file provided.'}, status=status.HTTP_400_BAD_REQUEST)
-
-#     image_file = request.FILES['file']
-#     email = request.POST.get('email', 'N/A') # Get email if sent, otherwise N/A
-
-#     prediction_status, confidence, predicted_condition_name = predict_ecg_image(image_file)
-
-#     if "Error" in prediction_status:
-#         return Response({'detail': prediction_status}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-#     response_data = {
-#         'status': prediction_status, # 'normal', 'abnormal', 'uncertain'
-#         'confidence': confidence,
-#         'condition': predicted_condition_name, # e.g., "Atrial Fibrillation"
-#         'description': class_descriptions.get(next((k for k, v in class_descriptions.items() if v == predicted_condition_name), 'unknown'), 'No specific description available.')
-#         # You might want to refine how description is mapped from class_descriptions here
-#     }
-
-#     return Response(response_data, status=status.HTTP_200_OK)
-
-
-# cnn_model_api/views.py
-# cnn_model_api/views.py
-# cnn_model_api/views.py
-# cnn_model_api/views.py
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -67,7 +24,7 @@ logger = logging.getLogger(__name__)
 @parser_classes([MultiPartParser, FormParser])
 def predict_image(request):
     # Check if a file was provided in the request
-    if 'file' not in request.FILES:
+    if 'image' not in request.FILES:
         logger.error("No image file provided in request.")
         return Response({'detail': 'No image file provided.'}, status=status.HTTP_400_BAD_REQUEST)
 
